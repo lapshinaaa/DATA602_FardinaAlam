@@ -1,0 +1,368 @@
+cat > index.html <<'HTML'
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Anastasiia Lapshina's personal page for DATA602 at the University of Maryland.">
+  <title>Anastasiia Lapshina — DATA602</title>
+
+  <style>
+    :root {
+      --background: #f3f1eb;
+      --paper: #fffefb;
+      --navy: #183b56;
+      --text: #283747;
+      --muted: #626c74;
+      --line: #dedfd8;
+      --accent: #c99752;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: #e6d7bc;
+      color: var(--navy);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 34px 0;
+    }
+
+    .monogram {
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: -2px;
+    }
+
+    .monogram span {
+      color: var(--accent);
+    }
+
+    .semester {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+      gap: 56px;
+      align-items: center;
+      padding: 64px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 18px 60px rgba(24, 59, 86, 0.045);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      flex-shrink: 0;
+      background: var(--accent);
+    }
+
+    h1 {
+      margin: 0 0 26px;
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 5.6vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -2.5px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .introduction {
+      max-width: 470px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .introduction strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .interests li {
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .course-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 410px;
+      padding: 34px;
+      background: var(--navy);
+      color: white;
+      border-radius: 20px;
+    }
+
+    .course-card::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -145px;
+      top: -140px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 35px rgba(255, 255, 255, 0.04),
+        0 0 0 70px rgba(255, 255, 255, 0.03);
+      pointer-events: none;
+    }
+
+    .course-label {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 46px;
+      color: #cad9e4;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .course-code {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .course-title {
+      max-width: 250px;
+      margin: 0;
+      color: #d9e4eb;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .course-bottom {
+      margin-top: 42px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .assignment {
+      margin: 0 0 12px;
+      color: #d9e4eb;
+      font-size: 12px;
+    }
+
+    .course-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      text-underline-offset: 5px;
+    }
+
+    .course-link:hover {
+      text-decoration: underline;
+    }
+
+    a:focus-visible {
+      outline: 3px solid #edc58b;
+      outline-offset: 6px;
+      border-radius: 2px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      padding: 24px 4px 36px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 40px;
+      }
+
+      .introduction {
+        max-width: 100%;
+      }
+
+      .course-card {
+        min-height: 330px;
+      }
+
+      .course-label {
+        margin-bottom: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        width: calc(100% - 28px);
+      }
+
+      header {
+        padding: 22px 4px;
+      }
+
+      .semester {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+
+      main {
+        padding: 28px 22px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.2px;
+      }
+
+      .introduction {
+        font-size: 15px;
+      }
+
+      .course-card {
+        padding: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="monogram" aria-label="Anastasiia Lapshina">AL<span>.</span></div>
+      <div class="semester">Fall 2026 · University of Maryland</div>
+    </header>
+
+    <main>
+      <section aria-labelledby="name">
+        <p class="eyebrow">A little about me</p>
+
+        <h1 id="name">Anastasiia<br>Lapshina<span>.</span></h1>
+
+        <p class="introduction">
+          I'm an M.S. student in <strong>Applied Machine Learning</strong>
+          at the University of Maryland. I'm interested in how we can use
+          data to solve practical problems—and how to make the models
+          behind those decisions more reliable and interpretable.
+        </p>
+
+        <ul class="interests" aria-label="Areas of interest">
+          <li>Machine learning</li>
+          <li>Data science</li>
+          <li>Responsible AI</li>
+        </ul>
+      </section>
+
+      <aside class="course-card" aria-labelledby="course-heading">
+        <div>
+          <p class="course-label">The course</p>
+          <h2 class="course-code" id="course-heading">DATA602</h2>
+          <p class="course-title">Principles of<br>Data Science</p>
+        </div>
+
+        <div class="course-bottom">
+          <p class="assignment">Homework 0 · Getting started</p>
+          <a
+            class="course-link"
+            href="https://github.com/ffalam/DATA602_FardinaAlam"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore the course repository
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>© 2026 Anastasiia Lapshina</p>
+      <p>Learning from data. Asking better questions.</p>
+    </footer>
+  </div>
+</body>
+</html>
+HTML
